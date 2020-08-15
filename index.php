@@ -41,7 +41,7 @@ $user = get_user();
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none"><?php $user['name'] ?></span>
+        <span class="d-block d-lg-none"><?php echo $user['name'] ?></span>
         <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="" /></span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -67,16 +67,19 @@ $user = get_user();
                 <span class="text-primary" id="desc">Health&Finance</span>
             </h1>
             <div class="subheading mb-5">
-                <?php $user['name'] ?>
-                <a href="mailto:name@email.com"><?php $user['email'] ?></a>
+                <?php echo $user['name'] ?>
+                <a href="mailto:name@email.com"><?php echo $user['email'] ?></a>
             </div>
-            <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
-            <div class="social-icons">
-                <a class="social-icon" href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-github"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="social-icon" href="#"><i class="fab fa-facebook-f"></i></a>
+            <p class="lead mb-5">
+                This is your personal assistance and health&finance tracker, just upload a receipt and Voody will extract and arrange the information for you.
+            </p>
+            <div class="jumbotron">
+                <p>Drag&Drop a receipt or click the button to take a photo or choose from the gallery.</p>
+                <div class="social-icons">
+                    <a class="btn btn-block" href="#">Upload a receipt</a>
+                </div>
             </div>
+
         </div>
     </section>
     <hr class="m-0" />
