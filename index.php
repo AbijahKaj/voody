@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +27,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -25,12 +39,13 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Home</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">My Receipts</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Health</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Finance</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Goals</a></li>
+            <hr class="m-0" />
+            <li><a href="index.php?logout='1'" class="nav-link js-scroll-trigger">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -40,8 +55,8 @@
     <section class="resume-section" id="about">
         <div class="resume-section-content">
             <h1 class="mb-0">
-                Clarence
-                <span class="text-primary">Taylor</span>
+                Voody
+                <span class="text-primary" id="desc">Health&Finance</span>
             </h1>
             <div class="subheading mb-5">
                 3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
@@ -60,7 +75,7 @@
     <!-- Experience-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-5">Experience</h2>
+            <h2 class="mb-5">My Receipts</h2>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Senior Web Developer</h3>
@@ -99,7 +114,7 @@
     <!-- Education-->
     <section class="resume-section" id="education">
         <div class="resume-section-content">
-            <h2 class="mb-5">Education</h2>
+            <h2 class="mb-5">Health</h2>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">University of Colorado Boulder</h3>
@@ -123,7 +138,7 @@
     <!-- Skills-->
     <section class="resume-section" id="skills">
         <div class="resume-section-content">
-            <h2 class="mb-5">Skills</h2>
+            <h2 class="mb-5">Finance</h2>
             <div class="subheading mb-3">Programming Languages & Tools</div>
             <ul class="list-inline dev-icons">
                 <li class="list-inline-item"><i class="fab fa-html5"></i></li>
@@ -164,58 +179,13 @@
     <!-- Interests-->
     <section class="resume-section" id="interests">
         <div class="resume-section-content">
-            <h2 class="mb-5">Interests</h2>
+            <h2 class="mb-5">Goals</h2>
             <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.</p>
             <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Awards-->
-    <section class="resume-section" id="awards">
-        <div class="resume-section-content">
-            <h2 class="mb-5">Awards & Certifications</h2>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Google Analytics Certified Developer
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    Mobile Web Specialist - Google Certification
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2009
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    2
-                    <sup>nd</sup>
-                    Place - University of Colorado Boulder - Emerging Tech Competition 2008
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    1
-                    <sup>st</sup>
-                    Place - James Buchanan High School - Hackathon 2006
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
-                    3
-                    <sup>rd</sup>
-                    Place - James Buchanan High School - Hackathon 2005
-                </li>
-            </ul>
-        </div>
-    </section>
+
 </div>
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
