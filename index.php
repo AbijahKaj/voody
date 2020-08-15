@@ -10,6 +10,14 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: login.php");
 }
+function get_user(){
+    $db = mysqli_connect('localhost', 'root', 'root', 'voody');
+    $email = $_SESSION['username'];
+    $user_check_query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+    $result = mysqli_query($db, $user_check_query);
+    return mysqli_fetch_array($result);
+}
+$user = get_user();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +26,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Resume - Start Bootstrap Theme</title>
+    <title>Voody - Your awesome health and finance tracker</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -33,7 +41,7 @@ if (isset($_GET['logout'])) {
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Clarence Taylor</span>
+        <span class="d-block d-lg-none"><?php $user['name'] ?></span>
         <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="" /></span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -59,8 +67,8 @@ if (isset($_GET['logout'])) {
                 <span class="text-primary" id="desc">Health&Finance</span>
             </h1>
             <div class="subheading mb-5">
-                3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
-                <a href="mailto:name@email.com">name@email.com</a>
+                <?php $user['name'] ?>
+                <a href="mailto:name@email.com"><?php $user['email'] ?></a>
             </div>
             <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
             <div class="social-icons">
