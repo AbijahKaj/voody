@@ -14,6 +14,7 @@ include_once 'utils.php';
 $user = get_user();
 $purchases = get_purchases();
 $receipts = get_receipts();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,38 +84,27 @@ $receipts = get_receipts();
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
             <h2 class="mb-5">My Receipts</h2>
+            <?php
+            $id = 0;
+            foreach ($receipts as $receipt): ?>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Senior Web Developer</h3>
-                    <div class="subheading mb-3">Intelitec Solutions</div>
-                    <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+                    <h3 class="mb-0">Receipt N <?php echo $id; ?></h3>
+                    <div class="subheading mb-3">
+                        <img src="<?php echo $receipt['img']; ?>" class="img-thumbnail receipt">
+                    </div>
+
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">March 2013 - Present</span></div>
+                <div class="flex-shrink-0"><span class="text-primary"><?php echo date('y M Y', $receipt['date']) ?></span></div>
             </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Developer</h3>
-                    <div class="subheading mb-3">Intelitec Solutions</div>
-                    <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">December 2011 - March 2013</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Junior Web Designer</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">July 2010 - December 2011</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Web Design Intern</h3>
-                    <div class="subheading mb-3">Shout! Media Productions</div>
-                    <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">September 2008 - June 2010</span></div>
-            </div>
+            <?php
+            $id++;
+            endforeach;
+            if(empty($receipts)):
+                ?>
+                <p>No receipts yet, please add some receipts photos!</p>
+            <?php endif; ?>
+
         </div>
     </section>
     <hr class="m-0" />
@@ -122,22 +112,25 @@ $receipts = get_receipts();
     <section class="resume-section" id="education">
         <div class="resume-section-content">
             <h2 class="mb-5">Health</h2>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">University of Colorado Boulder</h3>
-                    <div class="subheading mb-3">Bachelor of Science</div>
-                    <div>Computer Science - Web Development Track</div>
-                    <p>GPA: 3.23</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
-            </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">James Buchanan High School</h3>
-                    <div class="subheading mb-3">Technology Magnet Program</div>
-                    <p>GPA: 3.56</p>
-                </div>
-                <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
+            <div class="list-group">
+                <?php
+                $id = 0;
+                foreach ($purchases as $purchase): ?>
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Purchase N <?php echo $id; ?></h5>
+                            <small class="text-muted">3 days ago</small>
+                        </div>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        <small class="text-muted">Donec id elit non mi porta.</small>
+                    </div>
+                <?php
+                $id++;
+                endforeach;
+                if(empty($purchases)):
+                ?>
+                <p>No purchases yet, please add some receipts!</p>
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -146,40 +139,7 @@ $receipts = get_receipts();
     <section class="resume-section" id="skills">
         <div class="resume-section-content">
             <h2 class="mb-5">Finance</h2>
-            <div class="subheading mb-3">Programming Languages & Tools</div>
-            <ul class="list-inline dev-icons">
-                <li class="list-inline-item"><i class="fab fa-html5"></i></li>
-                <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
-                <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
-                <li class="list-inline-item"><i class="fab fa-angular"></i></li>
-                <li class="list-inline-item"><i class="fab fa-react"></i></li>
-                <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
-                <li class="list-inline-item"><i class="fab fa-sass"></i></li>
-                <li class="list-inline-item"><i class="fab fa-less"></i></li>
-                <li class="list-inline-item"><i class="fab fa-wordpress"></i></li>
-                <li class="list-inline-item"><i class="fab fa-gulp"></i></li>
-                <li class="list-inline-item"><i class="fab fa-grunt"></i></li>
-                <li class="list-inline-item"><i class="fab fa-npm"></i></li>
-            </ul>
-            <div class="subheading mb-3">Workflow</div>
-            <ul class="fa-ul mb-0">
-                <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    Mobile-First, Responsive Design
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    Cross Browser Testing & Debugging
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    Cross Functional Teams
-                </li>
-                <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    Agile Development & Scrum
-                </li>
-            </ul>
+
         </div>
     </section>
     <hr class="m-0" />
@@ -216,11 +176,13 @@ $receipts = get_receipts();
             dataType: 'json',
             success: function(response){
                 console.log(response);
-                updateReceipts(response);
+                if(response.status === 1){
+                    location.reload();
+                }
             },
         });
     })
-    function updateReceipts(image) {
+    function updateReceipts(data) {
 
     }
 </script>

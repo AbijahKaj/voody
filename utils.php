@@ -11,13 +11,13 @@ function get_db(){
 }
 function get_receipts(){
     $user_id = get_user()['id'];
-    $user_check_query = "SELECT * FROM receipts WHERE user='$user_id' ";
+    $user_check_query = "SELECT * FROM receipts WHERE user=$user_id LIMIT 50";
     $result = mysqli_query(get_db(), $user_check_query);
-    return mysqli_fetch_array($result);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 function get_purchases(){
     $user_id = get_user()['id'];
-    $user_check_query = "SELECT * FROM purchases WHERE user='$user_id' ";
+    $user_check_query = "SELECT * FROM purchases WHERE user=$user_id LIMIT 50";
     $result = mysqli_query(get_db(), $user_check_query);
-    return mysqli_fetch_array($result);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
