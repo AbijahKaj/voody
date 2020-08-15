@@ -1,4 +1,21 @@
 <?php
+class DB{
+    var $db;
+    public function __construct($db = null){
+        if($db === null){
+            $this->db = mysqli_connect('localhost', 'root', 'root', 'voody');
+        }else{
+            $this->db = $db;
+        }
+        return $this->db;
+    }
+    public static function getDB(){
+        return self::class->db;
+    }
+    public function __destroy(){
+        mysqli_close($this->db);
+    }
+}
 function get_user(){
     $db = mysqli_connect('localhost', 'root', 'root', 'voody');
     $email = $_SESSION['username'];

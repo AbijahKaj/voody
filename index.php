@@ -188,3 +188,4 @@ $receipts = get_receipts();
 </script>
 </body>
 </html>
+
