@@ -10,14 +10,10 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header("location: login.php");
 }
-function get_user(){
-    $db = mysqli_connect('localhost', 'root', 'root', 'voody');
-    $email = $_SESSION['username'];
-    $user_check_query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
-    $result = mysqli_query($db, $user_check_query);
-    return mysqli_fetch_array($result);
-}
+include_once 'utils.php';
 $user = get_user();
+$purchases = get_purchases();
+$receipts = get_receipts();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +21,7 @@ $user = get_user();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="author" content="Abijah Kajabika" />
     <title>Voody - Your awesome health and finance tracker</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -64,7 +60,7 @@ $user = get_user();
         <div class="resume-section-content">
             <h1 class="mb-0">
                 Voody
-                <span class="text-primary" id="desc">Health&Finance</span>
+                <span class="text-primary text-md-left" id="desc">Health&Finance</span>
             </h1>
             <div class="subheading mb-5">
                 <?php echo $user['name'] ?>
@@ -76,14 +72,14 @@ $user = get_user();
             <div class="jumbotron">
                 <p>Drag&Drop a receipt or click the button to take a photo or choose from the gallery.</p>
                 <div class="social-icons">
-                    <a class="btn btn-block" href="#">Upload a receipt</a>
+                    <input class="btn btn-block" id="upload" type="file" accept="image/*;capture=camera" value="Upload a receipt">
                 </div>
             </div>
 
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Experience-->
+    <!-- Receipts-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
             <h2 class="mb-5">My Receipts</h2>
@@ -205,5 +201,28 @@ $user = get_user();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+<script>
+    $("#upload").change((e) => {
+        var fd = new FormData();
+        var files = $('#upload')[0].files[0];
+        fd.append('file',files);
+
+        $.ajax({
+            url: 'upload.php',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(response){
+                console.log(response);
+                updateReceipts(response);
+            },
+        });
+    })
+    function updateReceipts(image) {
+
+    }
+</script>
 </body>
 </html>
