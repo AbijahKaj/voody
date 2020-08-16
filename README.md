@@ -5,7 +5,6 @@ Scan your checks and receipts to keep track of your health and finance
 
 ```
 git clone https://github.com/AbijahKaj/voody.git
-git 'this_repo'
 cd voody
 php -S localhost:8080
 ```
